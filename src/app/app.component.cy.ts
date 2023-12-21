@@ -6,6 +6,7 @@ describe('AppComponent', () => {
     cy.mount(AppComponent);
     cy.contains('p', 'outside defer');
     cy.contains('p', 'inside defer').should('not.exist');
+    cy.contains('p', 'inside defer with condition').should('not.exist');
   });
 
   it('renders inside the defer block', () => {
@@ -14,7 +15,7 @@ describe('AppComponent', () => {
     cy.contains('p', 'inside defer');
   });
 
-  it('renders inside the defer block after 5 seconds', () => {
+  it('renders inside the defer block with a condition', () => {
     cy.mount(AppComponent).defer().its(1).render(DeferBlockState.Complete);
     cy.contains('p', 'outside defer');
     cy.contains('p', 'inside defer with condition');
