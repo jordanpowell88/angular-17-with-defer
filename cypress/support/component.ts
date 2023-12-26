@@ -32,6 +32,7 @@ declare global {
       mount: typeof mount;
       defer(): Cypress.Chainable<DeferBlockFixture[]>;
       render(state: DeferBlockState): Cypress.Chainable<void>;
+      renderAll(state: DeferBlockState): Cypress.Chainable<DeferBlockFixture[]>;
     }
   }
 }
@@ -53,5 +54,17 @@ Cypress.Commands.add(
   { prevSubject: true },
   (subject: DeferBlockFixture, state: DeferBlockState) => {
     cy.wrap(subject.render(state));
+  }
+);
+
+Cypress.Commands.add(
+  'renderAll',
+  { prevSubject: true },
+  (subject: DeferBlockFixture[], state: DeferBlockState) => {
+    subject.forEach((deferBlock: DeferBlockFixture) => {
+      deferBlock.render(state);
+    });
+
+    cy.wrap(subject);
   }
 );

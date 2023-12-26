@@ -20,4 +20,11 @@ describe('AppComponent', () => {
     cy.contains('p', 'outside defer');
     cy.contains('p', 'inside defer with condition');
   });
+
+  it('renders all defer blocks using renderAll()', () => {
+    cy.mount(AppComponent).defer().renderAll(DeferBlockState.Complete);
+    cy.contains('p', 'outside defer');
+    cy.contains('p', 'inside defer');
+    cy.contains('p', 'inside defer with condition');
+  });
 });
